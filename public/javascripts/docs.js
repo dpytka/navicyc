@@ -1,4 +1,4 @@
-Ext.BLANK_IMAGE_URL = 'resources/s.gif';
+Ext.BLANK_IMAGE_URL = 'stylesheets/images/default/s.gif';
 
 Docs = {};
 
@@ -48,63 +48,9 @@ Ext.extend(ApiPanel, Ext.tree.TreePanel, {
         width: 200,
         emptyText: 'Search...',
         enableKeyEvents: true,
-        listeners: {
-          render: function(f){
-            this.filter = new Ext.tree.TreeFilter(this, {
-              clearBlank: true,
-              autoClear: true
-            });
-          },
-          keydown: {
-            fn: this.filterTree,
-            buffer: 350,
-            scope: this
-          },
-          scope: this
-        }
-      }), ' ', ' ', {
-        iconCls: 'icon-expand-all',
-        tooltip: 'Expand All',
-        handler: function(){
-          this.root.expand(true);
-        },
-        scope: this
-      }, '-', {
-        iconCls: 'icon-collapse-all',
-        tooltip: 'Collapse All',
-        handler: function(){
-          this.root.collapse(true);
-        },
-        scope: this
-      }]
+      })]
     })
     ApiPanel.superclass.initComponent.call(this);
-  },
-  filterTree: function(t, e){
-    var text = t.getValue();
-    Ext.each(this.hiddenPkgs, function(n){
-      n.ui.show();
-    });
-    if (!text) {
-      this.filter.clear();
-      return;
-    }
-    this.expandAll();
-    
-    var re = new RegExp('^' + Ext.escapeRe(text), 'i');
-    this.filter.filterBy(function(n){
-      return !n.attributes.isClass || re.test(n.text);
-    });
-    
-    // hide empty packages that weren't filtered
-    this.hiddenPkgs = [];
-    var me = this;
-    this.root.cascade(function(n){
-      if (!n.attributes.isClass && n.ui.ctNode.offsetHeight < 3) {
-        n.ui.hide();
-        me.hiddenPkgs.push(n);
-      }
-    });
   },
   selectClass: function(cls){
     if (cls) {
@@ -300,38 +246,8 @@ Ext.extend(MainPanel, Ext.TabPanel, {
       }));
       this.setActiveTab(p);
     }
-  },
-  
-  initSearch: function(){
-    // Custom rendering Template for the View
-    var resultTpl = new Ext.XTemplate('<tpl for=".">', '<div class="search-item">', '<a class="member" ext:cls="{cls}" ext:member="{member}" href="output/{cls}.html">', '<img src="../resources/images/default/s.gif" class="item-icon icon-{type}"/>{member}', '</a> ', '<a class="cls" ext:cls="{cls}" href="output/{cls}.html">{cls}</a>', '<p>{doc}</p>', '</div></tpl>');
-    
-    var p = new Ext.DataView({
-      applyTo: 'search',
-      tpl: resultTpl,
-      loadingText: 'Searching...',
-      store: this.searchStore,
-      itemSelector: 'div.search-item',
-      emptyText: '<h3>Use the search field above to search the Ext API for classes, properties, config options, methods and events.</h3>'
-    });
-  },
-  
-  doSearch: function(e){
-    var k = e.getKey();
-    if (!e.isSpecialKey()) {
-      var text = e.target.value;
-      if (!text) {
-        this.searchStore.baseParams.q = '';
-        this.searchStore.removeAll();
-      }
-      else {
-        this.searchStore.baseParams.q = text;
-        this.searchStore.reload();
-      }
-    }
   }
 });
-
 
 Ext.onReady(function(){
 
@@ -361,9 +277,7 @@ Ext.onReady(function(){
       el: 'header',
       border: false,
       margins: '0 0 5 0'
-    }, 
-    api, 
-    mainPanel]
+    }, api, mainPanel]
   });
   
   api.expandPath('/root/apidocs');
@@ -376,19 +290,5 @@ Ext.onReady(function(){
     mainPanel.loadClass('output/' + cls + '.html', cls, ps.member);
   }
   
-  viewport.doLayout();
-  
-  setTimeout(function(){
-    Ext.get('loading').remove();
-    Ext.get('loading-mask').fadeOut({
-      remove: true
-    });
-  }, 250);
-  
-});
-
-Ext.Ajax.on('requestcomplete', function(ajax, xhr, o){
-    if(typeof urchinTracker == 'function' && o && o.url){
-        urchinTracker(o.url);
-    }
+  viewport.doLayout();  
 });
