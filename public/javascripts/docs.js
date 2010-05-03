@@ -15,7 +15,7 @@ ApiPanel = function(){
     margins: '0 0 5 5',
     cmargins: '0 0 0 0',
     rootVisible: false,
-    lines: false,
+    lines: true,
     autoScroll: true,
     animCollapse: false,
     animate: false,
@@ -51,42 +51,14 @@ Ext.extend(ApiPanel, Ext.tree.TreePanel, {
       })]
     })
     ApiPanel.superclass.initComponent.call(this);
-  },
-  selectClass: function(cls){
-    if (cls) {
-      var parts = cls.split('.');
-      var last = parts.length - 1;
-      var res = [];
-      var pkg = [];
-      for (var i = 0; i < last; i++) { // things get nasty - static classes can have .
-        var p = parts[i];
-        var fc = p.charAt(0);
-        var staticCls = fc.toUpperCase() == fc;
-        if (p == 'Ext' || !staticCls) {
-          pkg.push(p);
-          res[i] = 'pkg-' + pkg.join('.');
-        }
-        else 
-          if (staticCls) {
-            --last;
-            res.splice(i, 1);
-          }
-      }
-      res[last] = cls;
-      
-      this.selectPath('/root/apidocs/' + res.join('/'));
-    }
   }
 });
 
 
 DocPanel = Ext.extend(Ext.Panel, {
   closable: true,
-  autoScroll: true,
   
   initComponent: function(){
-    var ps = this.cclass.split('.');
-    this.title = ps[ps.length - 1];
     Ext.apply(this, {
       tbar: ['->', {
         text: 'Options'
@@ -98,21 +70,6 @@ DocPanel = Ext.extend(Ext.Panel, {
 
 
 MainPanel = function(){
-  this.searchStore = new Ext.data.Store({
-    proxy: new Ext.data.ScriptTagProxy({
-      url: 'http://extjs.com/playpen/api.php'
-    }),
-    reader: new Ext.data.JsonReader({
-      root: 'data'
-    }, ['cls', 'member', 'type', 'doc']),
-    baseParams: {},
-    listeners: {
-      'beforeload': function(){
-        this.baseParams.qt = Ext.getCmp('search-type').getValue();
-      }
-    }
-  });
-  
   MainPanel.superclass.constructor.call(this, {
     id: 'doc-body',
     region: 'center',
@@ -164,7 +121,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
       }
       var p = this.add(new DocPanel({
         id: id,
-        cclass: cls,
+        title: cls,
         autoLoad: autoLoad,
         iconCls: Docs.icons[cls]
       }));

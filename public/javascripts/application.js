@@ -14,10 +14,6 @@ Ext.onReady(function(){
     }
   });
   
-  mainPanel.on('tabchange', function(tp, tab){
-    api.selectClass(tab.cclass);
-  });
-  
   var viewport = new Ext.Viewport({
     layout: 'border',
     items: [{
