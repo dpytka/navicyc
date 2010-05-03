@@ -1,17 +1,18 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
 Ext.onReady(function(){
 
   Ext.QuickTips.init();
   
-  var api = new SearchPanel();
+  var searchPanel = new SearchPanel();
   var mainPanel = new MainPanel();
   
-  api.on('click', function(node, e){
-    if (node.isLeaf()) {
-      e.stopEvent();
-      mainPanel.loadClass(node.attributes.href, node.id);
-    }
+  searchPanel.store.loadData(myData);
+  searchPanel.on('cellclick', function(grid, rowIndex, columnIndex, e){
+    e.stopEvent();
+    var record = grid.getStore().getAt(rowIndex);
+    var fieldName = grid.getColumnModel().getDataIndex(columnIndex);
+    var data = record.get(fieldName);
+
+    mainPanel.loadClass(data, data);
   });
   
   var viewport = new Ext.Viewport({
@@ -24,9 +25,8 @@ Ext.onReady(function(){
       el: 'header',
       border: false,
       margins: '0 0 5 0'
-    }, api, mainPanel]
+    }, searchPanel, mainPanel]
   });
   
-  api.expandPath('/root/apidocs');
-  viewport.doLayout();  
+  viewport.doLayout();
 });

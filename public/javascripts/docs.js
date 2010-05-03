@@ -8,27 +8,27 @@ SearchPanel = function(){
     region: 'west',
     split: true,
     header: false,
-    width: 280,
+    width: 195,
     minSize: 175,
     maxSize: 500,
     collapsible: true,
     margins: '0 0 5 5',
     cmargins: '0 0 0 0',
-    collapseMode: 'mini',
-    root: new Ext.tree.AsyncTreeNode({
-      text: 'Ext JS',
-      id: 'root',
-      expanded: true,
-      children: [Docs.classData]
-    })
+    collapseMode: 'mini'
   });
 };
 
-Ext.extend(SearchPanel, Ext.tree.TreePanel, {
+Ext.extend(SearchPanel, Ext.grid.GridPanel, {
   initComponent: function(){
     Ext.apply(this, {
+      store: new Ext.data.ArrayStore({
+        fields: ['name']
+      }),
+      columns: [
+            {header: 'Name', dataIndex: 'name'}
+        ],
       tbar: [' ', new Ext.form.TextField({
-        width: 200,
+        width: 150,
         emptyText: 'Search...',
         enableKeyEvents: true,
       })]
@@ -97,8 +97,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
       var p = this.add(new DocPanel({
         id: id,
         title: cls,
-        autoLoad: autoLoad,
-        iconCls: Docs.icons[cls]
+        autoLoad: autoLoad
       }));
       this.setActiveTab(p);
     }
