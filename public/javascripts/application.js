@@ -4,7 +4,7 @@ Ext.onReady(function(){
 
   Ext.QuickTips.init();
   
-  var api = new ApiPanel();
+  var api = new SearchPanel();
   var mainPanel = new MainPanel();
   
   api.on('click', function(node, e){
@@ -18,7 +18,7 @@ Ext.onReady(function(){
     layout: 'border',
     items: [{
       cls: 'docs-header',
-      height: 36,
+      height: 30,
       region: 'north',
       xtype: 'box',
       el: 'header',
@@ -28,14 +28,5 @@ Ext.onReady(function(){
   });
   
   api.expandPath('/root/apidocs');
-  
-  // allow for link in
-  var page = window.location.href.split('?')[1];
-  if (page) {
-    var ps = Ext.urlDecode(page);
-    var cls = ps['class'];
-    mainPanel.loadClass('output/' + cls + '.html', cls, ps.member);
-  }
-  
   viewport.doLayout();  
 });

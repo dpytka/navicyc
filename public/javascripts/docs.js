@@ -2,8 +2,8 @@ Ext.BLANK_IMAGE_URL = 'stylesheets/images/default/s.gif';
 
 Docs = {};
 
-ApiPanel = function(){
-  ApiPanel.superclass.constructor.call(this, {
+SearchPanel = function(){
+  SearchPanel.superclass.constructor.call(this, {
     id: 'api-tree',
     region: 'west',
     split: true,
@@ -14,35 +14,18 @@ ApiPanel = function(){
     collapsible: true,
     margins: '0 0 5 5',
     cmargins: '0 0 0 0',
-    rootVisible: false,
-    lines: true,
-    autoScroll: true,
-    animCollapse: false,
-    animate: false,
     collapseMode: 'mini',
-    loader: new Ext.tree.TreeLoader({
-      preloadChildren: true,
-      clearOnLoad: false
-    }),
     root: new Ext.tree.AsyncTreeNode({
       text: 'Ext JS',
       id: 'root',
       expanded: true,
       children: [Docs.classData]
-    }),
-    collapseFirst: false
-  });
-  // no longer needed!
-  //new Ext.tree.TreeSorter(this, {folderSort:true,leafAttr:'isClass'});
-  
-  this.getSelectionModel().on('beforeselect', function(sm, node){
-    return node.isLeaf();
+    })
   });
 };
 
-Ext.extend(ApiPanel, Ext.tree.TreePanel, {
+Ext.extend(SearchPanel, Ext.tree.TreePanel, {
   initComponent: function(){
-    this.hiddenPkgs = [];
     Ext.apply(this, {
       tbar: [' ', new Ext.form.TextField({
         width: 200,
@@ -50,7 +33,7 @@ Ext.extend(ApiPanel, Ext.tree.TreePanel, {
         enableKeyEvents: true,
       })]
     })
-    ApiPanel.superclass.initComponent.call(this);
+    SearchPanel.superclass.initComponent.call(this);
   }
 });
 
@@ -101,24 +84,16 @@ Ext.extend(MainPanel, Ext.TabPanel, {
     MainPanel.superclass.initEvents.call(this);
   },
   
-  loadClass: function(href, cls, member){
+  loadClass: function(href, cls){
     var id = 'docs-' + cls;
     var tab = this.getComponent(id);
     if (tab) {
       this.setActiveTab(tab);
-      if (member) {
-        tab.scrollToMember(member);
-      }
     }
     else {
       var autoLoad = {
         url: href
       };
-      if (member) {
-        autoLoad.callback = function(){
-          Ext.getCmp(id).scrollToMember(member);
-        }
-      }
       var p = this.add(new DocPanel({
         id: id,
         title: cls,
