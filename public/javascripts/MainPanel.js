@@ -28,7 +28,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         MainPanel.superclass.initEvents.call(this);
     },
 
-    loadClass: function(symbol) {
+    loadSymbol: function(symbol) {
         var tabId = 'docs-' + symbol;
         var tab = this.getComponent(tabId);
         if (tab) {

@@ -20,10 +20,10 @@ Ext.onReady(function() {
         var fieldName = grid.getColumnModel().getDataIndex(columnIndex);
         var data = record.get(fieldName);
 
-        mainPanel.loadClass(data);
+        mainPanel.loadSymbol(data);
     });
     searchPanel.on('submitsearch', function(symbol) {
-        mainPanel.loadClass(symbol);
+        mainPanel.loadSymbol(symbol);
     });
 
 
