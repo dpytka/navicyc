@@ -22,6 +22,10 @@ Ext.onReady(function() {
 
         mainPanel.loadClass(data);
     });
+    searchPanel.on('submitsearch', function(symbol) {
+        mainPanel.loadClass(symbol);
+    });
+
 
     var viewport = new Ext.Viewport({
         layout: 'border',

@@ -28,21 +28,20 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         MainPanel.superclass.initEvents.call(this);
     },
 
-    loadClass: function(href) {
-        var id = 'docs-' + href;
-        var tab = this.getComponent(id);
+    loadClass: function(symbol) {
+        var tabId = 'docs-' + symbol;
+        var tab = this.getComponent(tabId);
         if (tab) {
             this.setActiveTab(tab);
         } else {
-            var autoLoad = {
-                url: "symbol/show?name=" + href
-            };
-            var p = this.add(new DocPanel({
-                id: id,
-                title: href,
-                autoLoad: autoLoad
+            var newPanel = this.add(new DocPanel({
+                id: tabId,
+                title: symbol,
+                autoLoad: {
+                    url: "symbol/show?name=" + symbol
+                }
             }));
-            this.setActiveTab(p);
+            this.setActiveTab(newPanel);
         }
     }
 });

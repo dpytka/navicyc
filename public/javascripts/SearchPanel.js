@@ -16,6 +16,7 @@ var SearchPanel = function() {
 
 Ext.extend(SearchPanel, Ext.grid.GridPanel, {
     initComponent: function() {
+        var that = this;
         Ext.apply(this, {
             store: new Ext.data.ArrayStore({
                 fields: ['name']
@@ -26,11 +27,19 @@ Ext.extend(SearchPanel, Ext.grid.GridPanel, {
                     dataIndex: 'name'
                 }
             ],
-            tbar: [' ', new Ext.form.TextField({
-                width: 150,
-                emptyText: 'Search...',
-                enableKeyEvents: true
-            })]
+            tbar: [
+                new Ext.form.TextField({
+                    width: 150,
+                    emptyText: 'Search...',
+                    enableKeyEvents: true,
+                    listeners: {
+                        specialkey: function(field, e) {
+                            if (e.getKey() == e.ENTER) {
+                                that.fireEvent('submitsearch', field.getValue());
+                            }
+                        }
+                    }
+                })]
         });
         SearchPanel.superclass.initComponent.call(this);
     }
