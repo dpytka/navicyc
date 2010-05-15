@@ -3,7 +3,7 @@ Ext.BLANK_IMAGE_URL = 'stylesheets/images/default/s.gif';
 Ext.onReady(function() {
     Ext.QuickTips.init();
 
-    var searchPanel = new SearchPanel();
+    var searchPanel = new SymbolsPanel();
     var mainPanel = new MainPanel();
     var myData = [];
 

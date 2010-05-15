@@ -1,5 +1,5 @@
-var SearchPanel = function() {
-    SearchPanel.superclass.constructor.call(this, {
+var SymbolsPanel = function() {
+    SymbolsPanel.superclass.constructor.call(this, {
         id: 'api-tree',
         region: 'west',
         split: true,
@@ -14,7 +14,7 @@ var SearchPanel = function() {
     });
 };
 
-Ext.extend(SearchPanel, Ext.grid.GridPanel, {
+Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
     initComponent: function() {
         var that = this;
         Ext.apply(this, {
@@ -49,7 +49,7 @@ Ext.extend(SearchPanel, Ext.grid.GridPanel, {
                 }
             }
         });
-        SearchPanel.superclass.initComponent.call(this);
+        SymbolsPanel.superclass.initComponent.call(this);
     },
     addToStore: function(symbol) {
         if (this.store.findExact('name', symbol) == -1) {
