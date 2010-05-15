@@ -39,7 +39,15 @@ Ext.extend(SearchPanel, Ext.grid.GridPanel, {
                             }
                         }
                     }
-                })]
+                })],
+            listeners: {
+                cellclick: function(grid, rowIndex, columnIndex, e) {
+                    var record = grid.getStore().getAt(rowIndex);
+                    var fieldName = grid.getColumnModel().getDataIndex(columnIndex);
+                    var data = record.get(fieldName);
+                    that.fireEvent('submitsearch', data);
+                }
+            }
         });
         SearchPanel.superclass.initComponent.call(this);
     }
