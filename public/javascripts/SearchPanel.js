@@ -50,5 +50,8 @@ Ext.extend(SearchPanel, Ext.grid.GridPanel, {
             }
         });
         SearchPanel.superclass.initComponent.call(this);
+    },
+    addToStore: function(symbol) {
+        this.store.add(new Ext.data.Record({name:symbol}));
     }
 });

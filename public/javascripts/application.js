@@ -5,17 +5,12 @@ Ext.onReady(function() {
 
     var searchPanel = new SearchPanel();
     var mainPanel = new MainPanel();
-    var myData = [
-        ['Dog'],
-        ['Cat'],
-        ['Animal'],
-        ['Drug'],
-        ['Terrorism']
-    ];
+    var myData = [];
 
     searchPanel.store.loadData(myData);
     searchPanel.on('submitsearch', function(symbol) {
         mainPanel.loadSymbol(symbol);
+        searchPanel.addToStore(symbol);
     });
 
     var viewport = new Ext.Viewport({
