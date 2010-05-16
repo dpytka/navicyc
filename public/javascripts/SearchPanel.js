@@ -14,6 +14,26 @@ var SymbolsPanel = function() {
 
 Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
     initComponent: function() {
+        this.searchCombo = new Ext.form.ComboBox({
+            store: new Ext.data.JsonStore({
+                root: 'data',
+                fields:['name'],
+                url: 'symbol/complete'
+            }),
+            displayField: 'name',
+            autoWidth: true,
+            emptyText: 'Search...',
+            enableKeyEvents: true,
+            hideTrigger:true,
+            forceSelection: true,
+            mode: 'remote',
+            selectOnFocus: true,
+            listeners: {
+                select: function(combo, record) {
+                    that.fireEvent('submitsearch', record.data.name);
+                }
+            }
+        });
         var that = this;
         Ext.apply(this, {
             store: new Ext.data.ArrayStore({
@@ -28,28 +48,7 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
             ],
             autoExpandColumn: 'name',
             enableHdMenu: false,
-            tbar: [
-                new Ext.form.ComboBox({
-                    store: new Ext.data.JsonStore({
-                        root: 'data',
-                        fields:['name'],
-                        url: 'symbol/complete'
-                    }),
-                    displayField: 'name',
-                    autoWidth: true,
-                    emptyText: 'Search...',
-                    enableKeyEvents: true,
-                    hideTrigger:true,
-                    forceSelection: true,
-                    mode: 'remote',
-                    triggerAction: 'all',
-                    selectOnFocus: true,
-                    listeners: {
-                        select: function(combo, record) {
-                            that.fireEvent('submitsearch', record.data.name);
-                        }
-                    }
-                })],
+            tbar: [this.searchCombo],
             listeners: {
                 cellclick: function(grid, rowIndex, columnIndex, e) {
                     var record = grid.getStore().getAt(rowIndex);
