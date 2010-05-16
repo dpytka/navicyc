@@ -10,6 +10,8 @@ Ext.onReady(function() {
     searchPanel.store.loadData(myData);
     searchPanel.on('submitsearch', function(symbol) {
         mainPanel.loadSymbol(symbol);
+    });
+    mainPanel.on('loadedsymbol', function(symbol) {
         searchPanel.addToStore(symbol);
     });
 

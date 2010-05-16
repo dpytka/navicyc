@@ -12,7 +12,8 @@ class SymbolController < ApplicationController
                        }
       }
     else
-      render :json => {:success => false}
+      render :json => {:success => false,
+                       :message => 'Not found'}
     end
 
   end

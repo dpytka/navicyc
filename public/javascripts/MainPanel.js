@@ -27,12 +27,24 @@ Ext.extend(MainPanel, Ext.TabPanel, {
     initEvents: function() {
         MainPanel.superclass.initEvents.call(this);
     },
-
-    loadSymbol: function(symbol) {
+    isSymbolLoaded: function(symbol) {
         var tabId = 'docs-' + symbol;
         var tab = this.getComponent(tabId);
         if (tab) {
-            this.setActiveTab(tab);
+            return true;
+        }
+        else {
+            return false;
+        }
+    },
+    setActiveSymbol: function(symbol) {
+        var tabId = 'docs-' + symbol;
+        var tab = this.getComponent(tabId);
+        this.setActiveTab(tab);
+    },
+    loadSymbol: function(symbol) {
+        if (this.isSymbolLoaded(symbol)) {
+            this.setActiveSymbol(symbol);
         } else {
             Ext.Ajax.request({
                 url: "symbol/show",
@@ -44,10 +56,10 @@ Ext.extend(MainPanel, Ext.TabPanel, {
                     var jsonData = Ext.util.JSON.decode(response.responseText);
 
                     if (jsonData.success === true) {
-                        this.addSymbolTab(tabId, symbol, jsonData.data.comment);
+                        this.addSymbolTab(symbol, jsonData.data.comment);
                     }
                     else {
-                        alert('No symbol');
+                        alert(jsonData.message);
                     }
                 },
                 failure: function() {
@@ -56,12 +68,13 @@ Ext.extend(MainPanel, Ext.TabPanel, {
             });
         }
     },
-    addSymbolTab: function(tabId, symbol, content) {
+    addSymbolTab: function(symbol, content) {
         var newPanel = this.add(new DocPanel({
-            id: tabId,
+            id: 'docs-' + symbol,
             title: symbol,
             html: content
         }));
         this.setActiveTab(newPanel);
+        this.fireEvent('loadedsymbol', symbol);
     }
 });
