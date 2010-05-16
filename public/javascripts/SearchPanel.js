@@ -20,7 +20,6 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
                 fields: ['name']
             }),
             columns: [
-                new Ext.grid.RowNumberer(),
                 {
                     id: 'name',
                     header: 'Symbol',
@@ -31,6 +30,14 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
             enableHdMenu: false,
             tbar: [
                 new Ext.form.ComboBox({
+                    store: new Ext.data.JsonStore({
+                        root: 'data',
+                        idProperty: 'name',
+                        fields:['name'],
+                        url: 'symbol/complete'
+                    }),
+                    displayField: 'name',
+                    loadingText: 'Searching...',
                     autoWidth: true,
                     emptyText: 'Search...',
                     enableKeyEvents: true,

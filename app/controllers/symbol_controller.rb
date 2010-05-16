@@ -19,10 +19,12 @@ class SymbolController < ApplicationController
   end
 
   def complete
-    cyc = Cyc::Client.new
-    commnet = cyc.comment params[:name].to_sym
-    render :json => {:name => params[:name],
-                     :comment => commnet
+    render :json => {:success => true,
+                     :data => [
+                             {:name => 'Dog'},
+                             {:name => 'Cat'},
+                             {:name => 'Animal'}
+                     ]
     }
   end
 end
