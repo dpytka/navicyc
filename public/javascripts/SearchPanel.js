@@ -24,9 +24,10 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
             autoWidth: true,
             emptyText: 'Search...',
             enableKeyEvents: true,
-            hideTrigger:true,
+            hideTrigger: true,
             forceSelection: true,
             mode: 'remote',
+            minChars: 1,
             selectOnFocus: true,
             listeners: {
                 select: function(combo, record) {
