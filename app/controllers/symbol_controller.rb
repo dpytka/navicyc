@@ -3,6 +3,9 @@ require 'cycr'
 class SymbolController < ApplicationController
   def show
     cyc = Cyc::Client.new
-    @all_genls = cyc.comment params[:name].to_sym
+    commnet = cyc.comment params[:name].to_sym
+    render :json => {:name => params[:name],
+                     :comment => commnet
+    }
   end
 end

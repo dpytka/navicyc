@@ -28,10 +28,11 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
                 }
             ],
             tbar: [
-                new Ext.form.TextField({
-                    width: 150,
+                new Ext.form.ComboBox({
+                    autoWidth: true,
                     emptyText: 'Search...',
                     enableKeyEvents: true,
+                    hideTrigger:true,
                     listeners: {
                         specialkey: function(field, e) {
                             if (e.getKey() == e.ENTER) {
