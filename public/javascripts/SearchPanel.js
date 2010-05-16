@@ -32,21 +32,21 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
                 new Ext.form.ComboBox({
                     store: new Ext.data.JsonStore({
                         root: 'data',
-                        idProperty: 'name',
                         fields:['name'],
                         url: 'symbol/complete'
                     }),
                     displayField: 'name',
-                    loadingText: 'Searching...',
                     autoWidth: true,
                     emptyText: 'Search...',
                     enableKeyEvents: true,
                     hideTrigger:true,
+                    forceSelection: true,
+                    mode: 'remote',
+                    triggerAction: 'all',
+                    selectOnFocus: true,
                     listeners: {
-                        specialkey: function(field, e) {
-                            if (e.getKey() == e.ENTER) {
-                                that.fireEvent('submitsearch', field.getValue());
-                            }
+                        select: function(combo, record) {
+                            that.fireEvent('submitsearch', record.data.name);
                         }
                     }
                 })],

@@ -19,12 +19,12 @@ class SymbolController < ApplicationController
   end
 
   def complete
+    cyc = Cyc::Client.new
+    completes = cyc.constant_complete params[:query]
+    completes_map = completes.collect {|x| {:name => x}}
+
     render :json => {:success => true,
-                     :data => [
-                             {:name => 'Dog'},
-                             {:name => 'Cat'},
-                             {:name => 'Animal'}
-                     ]
+                     :data => completes_map
     }
   end
 end
