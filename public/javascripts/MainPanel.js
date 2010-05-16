@@ -34,14 +34,34 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         if (tab) {
             this.setActiveTab(tab);
         } else {
-            var newPanel = this.add(new DocPanel({
-                id: tabId,
-                title: symbol,
-                autoLoad: {
-                    url: "symbol/show?name=" + symbol
+            Ext.Ajax.request({
+                url: "symbol/show",
+                params: {
+                    name: symbol
+                },
+                scope: this,
+                success: function(response) {
+                    var jsonData = Ext.util.JSON.decode(response.responseText);
+
+                    if (jsonData.success === true) {
+                        this.addSymbolTab(tabId, symbol, jsonData.data.comment);
+                    }
+                    else {
+                        alert('No symbol');
+                    }
+                },
+                failure: function() {
+                    alert('Error Connection')
                 }
-            }));
-            this.setActiveTab(newPanel);
+            });
         }
+    },
+    addSymbolTab: function(tabId, symbol, content) {
+        var newPanel = this.add(new DocPanel({
+            id: tabId,
+            title: symbol,
+            html: content
+        }));
+        this.setActiveTab(newPanel);
     }
 });
