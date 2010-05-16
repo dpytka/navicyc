@@ -28,6 +28,13 @@ Ext.extend(MainPanel, Ext.TabPanel, {
     initEvents: function() {
         MainPanel.superclass.initEvents.call(this);
     },
+    showSymbolTab: function(symbol) {
+        if (this.isSymbolLoaded(symbol)) {
+            this.setActiveSymbol(symbol);
+        } else {
+            this.addSymbolTab(symbol);
+        }
+    },
     isSymbolLoaded: function(symbol) {
         var tabId = this.tabprefix + symbol;
         var tab = this.getComponent(tabId);
@@ -43,37 +50,16 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         var tab = this.getComponent(tabId);
         this.setActiveTab(tab);
     },
-    loadSymbol: function(symbol) {
-        if (this.isSymbolLoaded(symbol)) {
-            this.setActiveSymbol(symbol);
-        } else {
-            Ext.Ajax.request({
-                url: "symbol/show",
-                params: {
-                    name: symbol
-                },
-                scope: this,
-                success: function(response) {
-                    var jsonData = Ext.util.JSON.decode(response.responseText);
-
-                    if (jsonData.success === true) {
-                        this.addSymbolTab(symbol, jsonData.data.comment);
-                    }
-                    else {
-                        alert(jsonData.message);
-                    }
-                },
-                failure: function() {
-                    alert('Error Connection')
-                }
-            });
-        }
-    },
-    addSymbolTab: function(symbol, content) {
+    addSymbolTab: function(symbol) {
         var newPanel = this.add(new DocPanel({
             id: this.tabprefix + symbol,
             title: symbol,
-            html: content
+            autoLoad: {
+                url: "symbol/show",
+                params: {
+                    name: symbol
+                }
+            }
         }));
         this.setActiveTab(newPanel);
         this.fireEvent('loadedsymbol', symbol);
