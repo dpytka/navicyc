@@ -1,6 +1,5 @@
 var SymbolsPanel = function() {
     SymbolsPanel.superclass.constructor.call(this, {
-        id: 'api-tree',
         region: 'west',
         split: true,
         header: false,
@@ -9,7 +8,6 @@ var SymbolsPanel = function() {
         maxSize: 500,
         collapsible: true,
         margins: '0 0 5 5',
-        cmargins: '0 0 0 0',
         collapseMode: 'mini'
     });
 };
@@ -22,11 +20,15 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
                 fields: ['name']
             }),
             columns: [
+                new Ext.grid.RowNumberer(),
                 {
-                    header: 'Name',
+                    id: 'name',
+                    header: 'Symbol',
                     dataIndex: 'name'
                 }
             ],
+            autoExpandColumn: 'name',
+            enableHdMenu: false,
             tbar: [
                 new Ext.form.ComboBox({
                     autoWidth: true,
@@ -54,7 +56,9 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
     },
     addToStore: function(symbol) {
         if (this.store.findExact('name', symbol) == -1) {
-            this.store.add(new Ext.data.Record({name:symbol}));
+            this.store.insert(0, new Ext.data.Record({
+                name:symbol
+            }));
         }
     }
 });

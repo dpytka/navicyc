@@ -9,6 +9,7 @@ var MainPanel = function() {
         plugins: new Ext.ux.TabCloseMenu(),
         enableTabScroll: true,
         activeTab: 0,
+        tabprefix: 'symbol-',
 
         items: {
             id: 'welcome-panel',
@@ -28,7 +29,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         MainPanel.superclass.initEvents.call(this);
     },
     isSymbolLoaded: function(symbol) {
-        var tabId = 'docs-' + symbol;
+        var tabId = this.tabprefix + symbol;
         var tab = this.getComponent(tabId);
         if (tab) {
             return true;
@@ -38,7 +39,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         }
     },
     setActiveSymbol: function(symbol) {
-        var tabId = 'docs-' + symbol;
+        var tabId = this.tabprefix + symbol;
         var tab = this.getComponent(tabId);
         this.setActiveTab(tab);
     },
@@ -70,7 +71,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
     },
     addSymbolTab: function(symbol, content) {
         var newPanel = this.add(new DocPanel({
-            id: 'docs-' + symbol,
+            id: this.tabprefix + symbol,
             title: symbol,
             html: content
         }));
