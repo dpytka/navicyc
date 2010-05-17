@@ -1,5 +1,13 @@
 <div>
-  <%= @symbol %> - 
-  <%= @comment %>
-</div>
+  <span id="symbol_name"><%= @symbol %></span>
+  -
+  <span id="symbol_comment"><%= @comment %></span>
 
+  <div>
+
+    <% for genls in @all_genls %>
+        <span>   <%= genls %> </span>
+    <% end %>
+
+  </div>
+</div>

@@ -1,5 +1,6 @@
 var DocPanel = Ext.extend(Ext.Panel, {
     closable: true,
+    autoScroll:true,
 
     initComponent: function() {
         Ext.apply(this, {
