@@ -27,6 +27,7 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
             hideTrigger: true,
             forceSelection: true,
             mode: 'remote',
+            queryDelay: 750,
             minChars: 1,
             selectOnFocus: true,
             listeners: {

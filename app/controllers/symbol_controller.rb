@@ -6,6 +6,10 @@ class SymbolController < ApplicationController
     @symbol = params[:name]
     @all_genls = client.all_genls @symbol.to_sym
     @comment = client.comment @symbol.to_sym
+    if @comment == nil
+      render "symbolerror"
+      return
+    end
   end
 
   def complete
@@ -22,4 +26,5 @@ class SymbolController < ApplicationController
                      :data => completes_map
     }
   end
+
 end
