@@ -27,6 +27,14 @@ var MainPanel = function() {
 Ext.extend(MainPanel, Ext.TabPanel, {
     initEvents: function() {
         MainPanel.superclass.initEvents.call(this);
+        this.body.on('click', this.onClick, this);
+    },
+
+    onClick: function(e, target) {
+        if (target.localName == 'a') {
+            this.showSymbolTab(target.innerHTML);
+        }
+        e.stopEvent();
     },
     showSymbolTab: function(symbol) {
         if (this.isSymbolLoaded(symbol)) {
