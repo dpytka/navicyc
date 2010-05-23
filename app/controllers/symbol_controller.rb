@@ -4,9 +4,8 @@ class SymbolController < ApplicationController
   def show
     client = Cyc::Client.new
     @symbol = params[:name]
-    comment = client.comment params[:name].to_sym
-    @comment = comment.gsub(/#\$[\w|-]+/) {|c| "<a href=\"\">#{c[2..-1]}</a>"}
-    @all_genls = client.all_genls :Dog
+    @all_genls = client.all_genls @symbol.to_sym
+    @comment = client.comment @symbol.to_sym
   end
 
   def complete

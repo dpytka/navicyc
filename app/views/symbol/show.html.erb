@@ -1,7 +1,9 @@
 <div style="font:12px tahoma,arial,sans-serif;">
   <span id="symbol_name"><%= @symbol %></span>
   -
-  <span id="symbol_comment"><%= @comment %></span>
+  <span id="symbol_comment"><%=
+      @comment.gsub(/#\$[\w|-]+/) {|c| "<a href=\"\">#{c[2..-1]}</a>"} 
+  %></span>
 
   <div>
     Generalize - 
