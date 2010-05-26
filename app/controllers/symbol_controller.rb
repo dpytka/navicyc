@@ -7,8 +7,10 @@ class SymbolController < ApplicationController
     @all_genls = client.all_genls @symbol.to_sym
     @comment = client.comment @symbol.to_sym
     if @comment == nil
-      render "symbolerror"
-      return
+      @comment = "no comment"
+    end
+    if @all_genls == nil
+      @all_genls = []
     end
   end
 
