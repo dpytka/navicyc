@@ -1,0 +1,14 @@
+.section {
+    margin: 5px;
+    padding: 2px;
+    border: 1px solid #999;
+    background-color: #fafafa;
+    color: #555;
+    font-size: 90%;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.name {
+    font-weight: bold;
+}

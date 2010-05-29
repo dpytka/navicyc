@@ -1,12 +1,14 @@
-<div style="font:12px tahoma,arial,sans-serif;">
-  <span id="symbol_name"><%= @symbol %></span>
-  -
-  <span id="symbol_comment"><%=
-      @comment.gsub(/#\$[\w|-]+/) {|c| "<a href=\"\">#{c[2..-1]}</a>"} 
-  %></span>
+<div>
+  <div class="section">
+    <span class="name"><%= @symbol %></span>
+    -
+    <span><%= @comment.gsub(/#\$[\w|-]+/) { |c| "<a href=\"\">#{c[2..-1]}</a>" } %></span>
+  </div>
 
-  <div>
-    Generalize - 
+
+  <div class="section">
+    <span class="name">Generalize</span>
+    -
     <% for genls in @all_genls %>
         <a href="#"><%= genls %></a>&nbsp;
     <% end %>
