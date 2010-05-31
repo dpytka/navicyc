@@ -9,6 +9,19 @@
     -webkit-border-radius: 5px;
 }
 
+a {
+    text-decoration: none;
+}
+
 .name {
     font-weight: bold;
+}
+
+.apptitle {
+    margin: 5px;
+    padding: 2px 7px 2px 7px;
+    background-color: #fafafa;
+    font-family: Graublau Sans Web, Lucida Grande, sans-serif;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }

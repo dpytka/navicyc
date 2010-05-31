@@ -1,6 +1,5 @@
 var MainPanel = function() {
     MainPanel.superclass.constructor.call(this, {
-        id: 'doc-body',
         region: 'center',
         margins: '0 5 5 0',
         resizeTabs: true,
@@ -15,7 +14,7 @@ var MainPanel = function() {
             id: 'welcome-panel',
             title: 'NaviCyc Home',
             autoLoad: {
-                url: 'welcome.html',
+                url: 'home/welcome',
                 scope: this
             },
             iconCls: 'icon-docs',
