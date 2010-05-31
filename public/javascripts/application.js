@@ -3,23 +3,22 @@ Ext.BLANK_IMAGE_URL = 'stylesheets/images/default/s.gif';
 Ext.onReady(function() {
     Ext.QuickTips.init();
 
-    var searchPanel = new SymbolsPanel();
+    var symbolPanel = new SymbolPanel();
     var mainPanel = new MainPanel();
     var myData = [];
 
-    searchPanel.store.loadData(myData);
-    searchPanel.on('submitsearch', function(symbol) {
+    symbolPanel.store.loadData(myData);
+    symbolPanel.on('submitsearch', function(symbol) {
         mainPanel.showSymbolTab(symbol);
     });
     mainPanel.on('loadedsymbol', function(symbol) {
-        searchPanel.addToStore(symbol);
+        symbolPanel.addToStore(symbol);
     });
 
     var viewport = new Ext.Viewport({
         layout: 'border',
         items: [
             {
-                cls: 'docs-header',
                 height: 30,
                 region: 'north',
                 xtype: 'box',
@@ -27,10 +26,11 @@ Ext.onReady(function() {
                 border: false,
                 margins: '0 0 5 0'
             },
-            searchPanel,
+            symbolPanel,
             mainPanel
         ]
     });
 
     viewport.doLayout();
+    symbolPanel.focusSearchField();
 });

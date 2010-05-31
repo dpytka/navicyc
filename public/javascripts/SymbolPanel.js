@@ -1,5 +1,5 @@
-var SymbolsPanel = function() {
-    SymbolsPanel.superclass.constructor.call(this, {
+var SymbolPanel = function() {
+    SymbolPanel.superclass.constructor.call(this, {
         region: 'west',
         split: true,
         header: false,
@@ -12,7 +12,7 @@ var SymbolsPanel = function() {
     });
 };
 
-Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
+Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
     initComponent: function() {
         this.searchCombo = new Ext.form.ComboBox({
             store: new Ext.data.JsonStore({
@@ -60,7 +60,7 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
                 }
             }
         });
-        SymbolsPanel.superclass.initComponent.call(this);
+        SymbolPanel.superclass.initComponent.call(this);
     },
     addToStore: function(symbol) {
         if (this.store.findExact('name', symbol) == -1) {
@@ -68,5 +68,9 @@ Ext.extend(SymbolsPanel, Ext.grid.GridPanel, {
                 name:symbol
             }));
         }
+    },
+    focusSearchField: function() {
+        this.searchCombo.focus();
     }
+
 });
