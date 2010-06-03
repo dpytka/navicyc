@@ -1,11 +1,13 @@
 module SymbolHelper
   def format_comment(comment)
-    comment.gsub(/#\$[\w|-]+/) { |symbol| "<a href=\"#\">#{symbol[2..-1]}</a>" }
+    comment.gsub(/#\$[\w|-]+/) { |symbol|
+      "<a href=\"#\">#{symbol[2..-1]}</a>"
+    }
   end
 
   def format_all_genls(generalize_arr)
     return_string = ''
-    generalize_processor = lambda {|curr_generalize_arr|
+    generalize_processor = lambda { |curr_generalize_arr|
       curr_generalize_arr.each do |generalize|
         if generalize.is_a? Array
           return_string += " ("
