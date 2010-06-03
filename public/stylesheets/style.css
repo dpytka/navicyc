@@ -13,6 +13,14 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    color: navy;
+    -webkit-transition: color .5s ease-in;
+    -moz-transition: color .5s ease-in;
+    -o-transition: color .5s ease-in;
+    transition: color .5s ease-in;
+}
+
 .name {
     font-weight: bold;
 }
