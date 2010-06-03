@@ -16,7 +16,6 @@ module SymbolHelper
         end
       end
     }
-
     generalize_processor.call(generalize_arr)
     return_string
   end
