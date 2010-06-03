@@ -3,11 +3,21 @@ module SymbolHelper
     comment.gsub(/#\$[\w|-]+/) { |symbol| "<a href=\"#\">#{symbol[2..-1]}</a>" }
   end
 
-  def format_all_genls(generalize_list)
+  def format_all_genls(generalize_arr)
     return_string = ''
-    generalize_list.each do |generalize|
-      return_string += "<a href=\"#\">#{generalize}</a> "
-    end
+    generalize_processor = lambda {|curr_generalize_arr|
+      curr_generalize_arr.each do |generalize|
+        if generalize.is_a? Array
+          return_string += " ("
+          generalize_processor.call(generalize)
+          return_string += ")"
+        else
+          return_string += "<a href=\"#\">#{generalize}</a> "
+        end
+      end
+    }
+
+    generalize_processor.call(generalize_arr)
     return_string
   end
 end
