@@ -1,8 +1,7 @@
 %div
   .section
     %span.name=@symbol
-    = @comment.gsub(/#\$[\w|-]+/) { |c| "<a href=\"\">#{c[2..-1]}</a>" }
+    = format_comment @comment
   .section
     %span.name Generalize
-    - for genls in @all_genls
-      %a{:href => "#"}=genls
+    = format_all_genls @all_genls
