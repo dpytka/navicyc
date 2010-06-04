@@ -10,9 +10,9 @@ module SymbolHelper
     generalize_processor = lambda { |curr_generalize_arr|
       curr_generalize_arr.each do |generalize|
         if generalize.is_a? Array
-          return_string += " ("
+          return_string += '<div class="symbolscollection">'
           generalize_processor.call(generalize)
-          return_string += ")"
+          return_string += '</div>'
         else
           return_string += "<a href=\"#\">#{generalize}</a> "
         end

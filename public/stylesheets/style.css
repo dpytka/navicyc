@@ -4,9 +4,20 @@
     border: 1px solid #999;
     background-color: #fafafa;
     color: #555;
-    font-size: 90%;
+    font-size: 14px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+
+.symbolscollection {
+    margin: 0px 2px 0px 2px;
+    padding-left: 2px;
+    display: inline-block;
+    border-left: 1px solid #999;
+    border-right: 1px solid #999;
+    background-color: #efefef;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }
 
 a {
