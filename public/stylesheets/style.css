@@ -39,9 +39,11 @@ a:hover {
 .apptitle {
     margin: 5px;
     padding: 2px 7px 2px 7px;
-    background-color: #fafafa;
+    /*background-color: #fafafa;*/
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(190, 200, 220, 0.25)), to(rgba(255, 255, 255, 0.25)));
     font-family: Graublau Sans Web, Lucida Grande, sans-serif;
-    text-shadow: 1px 1px 2px #000;
+    font-size: 20px;
+    text-shadow: rgba(64, 64, 64, 0.5) 1px 1px 2px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
