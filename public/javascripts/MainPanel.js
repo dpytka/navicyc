@@ -8,7 +8,7 @@ var MainPanel = function() {
         plugins: new Ext.ux.TabCloseMenu(),
         enableTabScroll: true,
         activeTab: 0,
-        tabprefix: 'symbol-',
+        tabprefix: 'tab-',
 
         items: {
             id: 'welcome-panel',
