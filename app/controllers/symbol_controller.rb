@@ -14,6 +14,19 @@ class SymbolController < ApplicationController
     end
   end
 
+  def showdenotation
+    client = Cyc::Client.new
+    @symbol = params[:name]
+    @all_genls = client.all_genls @symbol.to_sym
+    @comment = client.comment @symbol.to_sym
+    if @comment == nil
+      @comment = "no comment"
+    end
+    if @all_genls == nil
+      @all_genls = []
+    end
+  end  
+
   def complete
     client = Cyc::Client.new
     completes = client.constant_complete params[:query]

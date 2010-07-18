@@ -1,0 +1,7 @@
+%div{:id => @symbol}
+  #comment.section
+    %span.name=@symbol
+    = format_comment @comment
+  #generalize.section
+    %span.name Generalize
+    = format_all_genls @all_genls

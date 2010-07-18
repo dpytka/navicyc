@@ -8,11 +8,11 @@ Ext.onReady(function() {
     var myData = [];
 
     symbolPanel.store.loadData(myData);
-    symbolPanel.on('submitsearch', function(symbol) {
-        mainPanel.showSymbolTab(symbol);
+    symbolPanel.on('submitsearch', function(symbol, type) {
+        mainPanel.showSymbolTab(symbol, type);
     });
-    mainPanel.on('loadedsymbol', function(symbol) {
-        symbolPanel.addToStore(symbol);
+    mainPanel.on('loadedsymbol', function(symbol, type) {
+        symbolPanel.addToStore(symbol, type);
     });
 
     var viewport = new Ext.Viewport({

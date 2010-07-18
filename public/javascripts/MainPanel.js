@@ -35,11 +35,11 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         }
         e.stopEvent();
     },
-    showSymbolTab: function(symbol) {
+    showSymbolTab: function(symbol, type) {
         if (this.isSymbolLoaded(symbol)) {
             this.setActiveSymbol(symbol);
         } else {
-            this.addSymbolTab(symbol);
+            this.addSymbolTab(symbol, type);
         }
     },
     isSymbolLoaded: function(symbol) {
@@ -57,18 +57,25 @@ Ext.extend(MainPanel, Ext.TabPanel, {
         var tab = this.getComponent(tabId);
         this.setActiveTab(tab);
     },
-    addSymbolTab: function(symbol) {
+    addSymbolTab: function(symbol, type) {
+        var url;
+        if (type === 'symbol') {
+            url = "symbol/show";
+        }
+        else {
+            url = "symbol/showdenotation/";
+        }
         var newPanel = this.add(new DocPanel({
             id: this.tabprefix + symbol,
             title: symbol,
             autoLoad: {
-                url: "symbol/show",
+                url: url,
                 params: {
                     name: symbol
                 }
             }
         }));
         this.setActiveTab(newPanel);
-        this.fireEvent('loadedsymbol', symbol);
+        this.fireEvent('loadedsymbol', symbol, type);
     }
 });
