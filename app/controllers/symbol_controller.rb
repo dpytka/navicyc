@@ -19,7 +19,9 @@ class SymbolController < ApplicationController
     completes = client.constant_complete params[:query]
 
     if completes
-      completes_map = completes.collect { |complete| {:name => complete} }
+      completes_map = completes.collect { |complete|
+        {:name => complete}
+      }
     else
       completes_map = []
     end
