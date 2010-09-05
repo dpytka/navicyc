@@ -14,7 +14,7 @@ class SymbolController < ApplicationController
     end
   end
 
-  def showdenotation
+  def show_denotation
     client = Cyc::Client.new
     @symbol = params[:name]
     @all_genls = client.all_genls @symbol.to_sym

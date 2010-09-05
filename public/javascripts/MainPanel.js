@@ -63,7 +63,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
             url = "symbol/show";
         }
         else {
-            url = "symbol/showdenotation/";
+            url = "symbol/show_denotation/";
         }
         var newPanel = this.add(new DocPanel({
             id: this.tabprefix + symbol,
