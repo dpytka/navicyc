@@ -25,7 +25,7 @@ class SymbolController < ApplicationController
     if @all_genls == nil
       @all_genls = []
     end
-  end  
+  end
 
   def complete
     client = Cyc::Client.new
@@ -43,5 +43,4 @@ class SymbolController < ApplicationController
                      :data => completes_map
     }
   end
-
 end

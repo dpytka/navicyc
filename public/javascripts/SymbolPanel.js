@@ -81,5 +81,4 @@ Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
     focusSearchField: function() {
         this.searchCombo.focus();
     }
-
 });
