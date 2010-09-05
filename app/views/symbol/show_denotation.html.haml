@@ -1,6 +1,6 @@
-%div{:id => @symbol}
+%div{:id => @symbol.value}
   #comment.section
-    %span.name=@symbol
+    %span.name=@symbol.value
     = format_comment @comment
   #generalize.section
     %span.name Generalize
