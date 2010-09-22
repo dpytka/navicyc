@@ -16,9 +16,13 @@ class SymbolController < ApplicationController
 
   def show_denotation
     client = Cyc::Client.new
-    @symbol = (client.denotation_mapper params[:name])[0]
-    @all_genls = client.all_genls @symbol
-    @comment = client.comment @symbol
+    @name = params[:name]
+    denotaion = client.denotation_mapper params[:name]
+    if denotaion != nil
+      @symbol = (client.denotation_mapper params[:name])[0]
+      @all_genls = client.all_genls @symbol
+      @comment = client.comment @symbol
+    end
     if @comment == nil
       @comment = "no comment"
     end
