@@ -5,12 +5,16 @@ class SymbolController < ApplicationController
     client = Cyc::Client.new
     @symbol = params[:name]
     @all_genls = client.all_genls @symbol.to_sym
+    @max_specs = client.max_specs @symbol.to_sym
     @comment = client.comment @symbol.to_sym
     if @comment == nil
       @comment = "no comment"
     end
     if @all_genls == nil
       @all_genls = []
+    end
+    if @max_specs == nil
+      @max_specs = []
     end
   end
 
@@ -21,6 +25,7 @@ class SymbolController < ApplicationController
     if denotaion != nil
       @symbol = (client.denotation_mapper params[:name])[0]
       @all_genls = client.all_genls @symbol
+      @max_specs = client.max_specs @symbol
       @comment = client.comment @symbol
     end
     if @comment == nil
@@ -28,6 +33,9 @@ class SymbolController < ApplicationController
     end
     if @all_genls == nil
       @all_genls = []
+    end
+    if @max_specs == nil
+      @max_specs = []
     end
   end
 
