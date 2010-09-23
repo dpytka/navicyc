@@ -60,7 +60,7 @@ Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
             enableHdMenu: false,
             tbar: [this.searchCombo],
             listeners: {
-                cellclick: function(grid, rowIndex, columnIndex, e) {
+                cellclick: function(grid, rowIndex) {
                     var record = grid.getStore().getAt(rowIndex);
                     var name = record.get('name');
                     var type = record.get('type');
