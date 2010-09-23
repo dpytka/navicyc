@@ -62,9 +62,9 @@ Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
             listeners: {
                 cellclick: function(grid, rowIndex, columnIndex, e) {
                     var record = grid.getStore().getAt(rowIndex);
-                    var fieldName = grid.getColumnModel().getDataIndex(columnIndex);
-                    var data = record.get(fieldName);
-                    that.fireEvent('submitsearch', data);
+                    var name = record.get('name');
+                    var type = record.get('type');
+                    that.fireEvent('submitsearch', name, type);
                 }
             }
         });
