@@ -71,7 +71,7 @@ Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
         SymbolPanel.superclass.initComponent.call(this);
     },
     addToStore: function(symbol, type) {
-        if (this.store.findExact('name', symbol) == -1) {
+        if (this.store.findExact('name', symbol) === -1) {
             this.store.insert(0, new Ext.data.Record({
                 name:symbol,
                 type:type

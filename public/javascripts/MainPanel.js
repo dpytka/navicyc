@@ -31,7 +31,7 @@ Ext.extend(MainPanel, Ext.TabPanel, {
 
     onClick: function(e, target) {
         if (target.localName == 'a') {
-            this.showSymbolTab(target.innerHTML);
+            this.showSymbolTab(target.innerHTML, 'symbol');
         }
         e.stopEvent();
     },
