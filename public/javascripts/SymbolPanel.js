@@ -32,11 +32,11 @@ Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
             selectOnFocus: true,
             listeners: {
                 select: function(combo, record) {
-                    that.fireEvent('submitsearch', record.data.name, 'symbol');
+                    that.fireEvent('show_element', record.data.name, 'symbol');
                 },
                 keypress: function(combo, e) {
                     if (e.getKey() === Ext.EventObject.ENTER && !combo.findRecord('name', combo.getValue())) {
-                        that.fireEvent('submitsearch', combo.getValue(), 'denotation');
+                        that.fireEvent('show_element', combo.getValue(), 'denotation');
                     }
                 }
             }
@@ -64,7 +64,7 @@ Ext.extend(SymbolPanel, Ext.grid.GridPanel, {
                     var record = grid.getStore().getAt(rowIndex);
                     var name = record.get('name');
                     var type = record.get('type');
-                    that.fireEvent('submitsearch', name, type);
+                    that.fireEvent('show_element', name, type);
                 }
             }
         });

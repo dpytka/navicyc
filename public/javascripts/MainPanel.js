@@ -76,6 +76,6 @@ Ext.extend(MainPanel, Ext.TabPanel, {
             }
         }));
         this.setActiveTab(newPanel);
-        this.fireEvent('loadedsymbol', symbol, type);
+        this.fireEvent('element_loaded', symbol, type);
     }
 });

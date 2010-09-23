@@ -8,10 +8,10 @@ Ext.onReady(function() {
     var myData = [];
 
     symbolPanel.store.loadData(myData);
-    symbolPanel.on('submitsearch', function(symbol, type) {
+    symbolPanel.on('show_element', function(symbol, type) {
         mainPanel.showSymbolTab(symbol, type);
     });
-    mainPanel.on('loadedsymbol', function(symbol, type) {
+    mainPanel.on('element_loaded', function(symbol, type) {
         symbolPanel.addToStore(symbol, type);
     });
 
