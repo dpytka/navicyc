@@ -41,4 +41,8 @@ class ApplicationController < ActionController::Base
   def cyc
     CYC
   end
+
+  def sparql
+    SPARQL_CLIENTS
+  end
 end
